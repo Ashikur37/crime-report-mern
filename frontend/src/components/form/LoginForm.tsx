@@ -4,7 +4,7 @@ import { z } from "zod";
 import { loginSchema } from "../../utils/validations/auth";
 import { login } from "../../services/authService";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 
@@ -94,12 +94,12 @@ const LoginForm = () => {
                 </a>
             </div>
             <div className="text-center">
-                <a
+                <Link
                     className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                    href="./index.html"
+                    to="/register"
                 >
                     Don't have an account? Register!
-                </a>
+                </Link>
             </div>
         </form>
     )

@@ -5,7 +5,7 @@ import { registerSchema } from "../../utils/validations/auth";
 import { signup } from "../../services/authService";
 import { FC, useState } from "react";
 import toast from 'react-hot-toast';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterForm: FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -176,12 +176,12 @@ const RegisterForm: FC = () => {
                 </a>
             </div>
             <div className="text-center">
-                <a
+                <Link
                     className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                    href="./index.html"
+                    to="/login"
                 >
                     Already have an account? Login!
-                </a>
+                </Link>
             </div>
         </form>
     )
