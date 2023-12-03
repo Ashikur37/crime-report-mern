@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import jsonwebtoken from "jsonwebtoken";
 import User from "../models/User";
-import { IReqAuth } from "../utils/interface";
-export const authMiddleware = async (
+import { IReqAuth, userRole } from "../utils/interface";
+export const adminMiddleware = async (
   req: IReqAuth,
   res: Response,
   next: NextFunction
@@ -22,9 +22,14 @@ export const authMiddleware = async (
   const user = await User.findById(decoded?.id);
   if (!user) {
     res.status(401).json({
-      message:"Unauthenticated"
-    })
-    return;
+        message:"Unauthenticated"
+      })
+      return;
+  }
+  if(user.role!=userRole.ADMIN){
+    res.status(401).json({
+        message:"Unauthenticated"
+      })
   }
   req.user = user;
 

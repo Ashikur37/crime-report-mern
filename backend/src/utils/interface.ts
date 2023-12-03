@@ -6,6 +6,23 @@ export enum userRole {
   INVESTIGATOR = "INVESTIGATOR",
 }
 
+export enum crimeType{
+  Fraud="Fraud",
+  Cybercrime="Cybercrime",
+  Robbery="Robbery",
+  Kidnapping="Kidnapping",
+  SexualAssault="Sexual Assault",
+  DrugPossession="Drug Possession"
+
+}
+
+export enum crimeStatus{
+  Pending="Pending",
+  Running="Running",
+  Cancelled="Cancelled",
+  Completed="Completed"
+}
+
 // export interface IDecodedToken {
 //   id?: string;
 //   iat: number;
@@ -14,7 +31,9 @@ export enum userRole {
 export interface IReqAuth extends Request {
   user?: IUser;
 }
+
 export interface IUser extends Document {
+  _id:string,
   fullname: string;
   email: string;
   password: string;

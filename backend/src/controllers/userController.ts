@@ -53,9 +53,18 @@ const signIn = async (req: Request, res: Response) => {
       httpOnly: false,
       // secure: true,
       // sameSite: "none",
-      maxAge: 720 * 60 * 60 * 1000,
+      maxAge: 720 * 60 * 660 * 1000,
     });
     res.json({
+      data: {
+        token,
+        fullname: user.fullname,
+        _id: user._id,
+        email: user.email,
+        phone: user.phone,
+        role:user.role
+
+      },
       success: true,
       message: "Login successfull",
     });

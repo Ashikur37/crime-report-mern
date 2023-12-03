@@ -6,11 +6,14 @@ import { login } from "../../services/authService";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/slices/authSlice";
 
 
 
 const LoginForm = () => {
     const [loading, setLoading] = useState<boolean>(false);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const {
         register,
@@ -25,8 +28,9 @@ const LoginForm = () => {
         const result = await login(data)
         setLoading(false);
         if (result.success) {
+            dispatch(setUser(result.data));
             toast.success("Login successfull");
-            navigate('/user');
+            navigate('/');
         }
         else {
             toast.error(result.message);

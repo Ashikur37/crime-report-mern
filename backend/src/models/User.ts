@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import crypto from "crypto";
 import { IUser, userRole } from "../utils/interface";
 
 const userSchema = new mongoose.Schema(

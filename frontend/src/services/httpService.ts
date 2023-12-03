@@ -6,6 +6,7 @@ type Props = {
 export async function getRequest({ url }: { url: string }) {
   const requestOptions = {
     method: "GET",
+    credentials: 'include' as RequestCredentials,
     headers: {
       "Content-Type": "application/json",
     },
