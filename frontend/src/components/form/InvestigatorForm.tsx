@@ -1,30 +1,31 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { registerSchema } from "../../utils/validations/auth";
-import { signup } from "../../services/authService";
+import { investigaotrSchema } from "../../utils/validations/auth";
 import { FC, useState } from "react";
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import { createInvestigator } from "../../services/adminService";
+import { districts, divisions, upazilas } from "../../utils/validations/area";
 
-const RegisterForm: FC = () => {
+const InvestigatorForm: FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate();
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<z.infer<typeof registerSchema>>({
-        resolver: zodResolver(registerSchema),
+    } = useForm<z.infer<typeof investigaotrSchema>>({
+        resolver: zodResolver(investigaotrSchema),
     });
 
-    const onSubmit: SubmitHandler<z.infer<typeof registerSchema>> = async (data) => {
+    const onSubmit: SubmitHandler<z.infer<typeof investigaotrSchema>> = async (data) => {
         setLoading(true);
-        const result = await signup(data)
+        const result = await createInvestigator(data)
         setLoading(false);
         if (result.success) {
-            toast.success("Regration successfull");
-            navigate('/login');
+            toast.success("Investigator added successfully");
+            navigate('/investigators');
         }
         else {
             toast.error(result.message);
@@ -100,6 +101,76 @@ const RegisterForm: FC = () => {
                 </div>
 
             </div>
+            <div className="mb-4">
+                <label
+                    className="block mb-2 text-sm font-bold text-gray-700"
+                >
+                    Division
+                </label>
+                <select {...register("division")} className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${errors.division && "border-red-500"
+                    } rounded appearance-none focus:outline-none focus:shadow-outline`}>
+                    <option value="">Select division</option>
+                    {divisions.map((division, index) => <option key={index} value={division.name}>{division.name}</option>)}
+                </select>
+                {errors.division && (
+                    <p className="text-xs italic text-red-500 mt-2">
+                        {errors.division?.message}
+                    </p>
+                )}
+            </div>
+            <div className="mb-4">
+                <label
+                    className="block mb-2 text-sm font-bold text-gray-700"
+                >
+                    District
+                </label>
+                <select {...register("district")} className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${errors.district && "border-red-500"
+                    } rounded appearance-none focus:outline-none focus:shadow-outline`}>
+                    <option value="">Select district</option>
+                    {districts.map((district, index) => <option key={index} value={district.name}>{district.name}</option>)}
+                </select>
+                {errors.district && (
+                    <p className="text-xs italic text-red-500 mt-2">
+                        {errors.district?.message}
+                    </p>
+                )}
+            </div>
+            <div className="mb-4">
+                <label
+                    className="block mb-2 text-sm font-bold text-gray-700"
+                >
+                    Upazila
+                </label>
+                <select {...register("upazila")} className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${errors.upazila && "border-red-500"
+                    } rounded appearance-none focus:outline-none focus:shadow-outline`}>
+                    <option value="">Select upazila</option>
+                    {upazilas.map((upazila, index) => <option key={index} value={upazila.name}>{upazila.name}</option>)}
+                </select>
+                {errors.upazila && (
+                    <p className="text-xs italic text-red-500 mt-2">
+                        {errors.upazila?.message}
+                    </p>
+                )}
+            </div>
+            <div className="mb-4">
+                <label
+                    className="block mb-2 text-sm font-bold text-gray-700"
+                >
+                    Address
+                </label>
+                <input
+                    className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${errors.address && "border-red-500"
+                        } rounded appearance-none focus:outline-none focus:shadow-outline`}
+                    type="text"
+                    placeholder="Address"
+                    {...register("address")}
+                />
+                {errors.address && (
+                    <p className="text-xs italic text-red-500 mt-2">
+                        {errors.address?.message}
+                    </p>
+                )}
+            </div>
             <div className="mb-4 md:flex md:justify-between">
                 <div className="mb-4 md:mr-2 md:mb-0 w-full">
                     <label
@@ -142,49 +213,19 @@ const RegisterForm: FC = () => {
                     )}
                 </div>
             </div>
-            <div className="mb-4">
-                <input type="checkbox" id="terms" {...register("terms")} />
-                <label
-                    htmlFor="terms"
-                    className={`ml-2 mb-2 text-sm font-bold ${errors.terms ? "text-red-500" : "text-gray-700"
-                        }`}
-                >
-                    Accept Terms & Conditions
-                </label>
-                {errors.terms && (
-                    <p className="text-xs italic text-red-500 mt-2">
-                        {errors.terms?.message}
-                    </p>
-                )}
-            </div>
+           
             <div className="mb-6 text-center">
                 <button
                     className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                     type="submit"
                     disabled={loading}
                 >
-                    Register Account
+                    Add
                 </button>
             </div>
-            <hr className="mb-6 border-t" />
-            <div className="text-center">
-                <a
-                    className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                    href="#test"
-                >
-                    Forgot Password?
-                </a>
-            </div>
-            <div className="text-center">
-                <Link
-                    className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                    to="/login"
-                >
-                    Already have an account? Login!
-                </Link>
-            </div>
+            
         </form>
     )
 }
 
-export default RegisterForm
+export default InvestigatorForm

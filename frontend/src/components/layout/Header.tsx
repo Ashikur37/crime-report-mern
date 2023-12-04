@@ -10,7 +10,7 @@ const Header = () => {
     const navigate = useNavigate();
     console.log(user)
     return (
-        <header className="flex justify-end items-center px-20 py-4 shadow-md">
+        <header className="flex justify-end items-center px-20 py-4 shadow-md bg-[#2688ac] text-white">
             <Link to='/' className="mr-auto hover:text-teal-300">Home</Link>
             <nav>
                 <ul>
@@ -19,21 +19,21 @@ const Header = () => {
                             {
                                 user.role == "USER" ? <>
                                     <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
-                                        <Link to="/my-reports">My Reports</Link>
+                                        <Link className="text-white" to="/my-reports">My Reports</Link>
                                     </li>
                                     <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
-                                        <Link to="/report-crime">Report Crime</Link>
+                                        <Link className="text-white" to="/report-crime">Report Crime</Link>
                                     </li>
                                 </> : <>
                                     <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
-                                        <Link to="/reports"> Reports</Link>
+                                        <Link className="text-white" to="/reports"> Reports</Link>
                                     </li>
                                     <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
-                                        <Link to="/investigators"> Investigators</Link>
+                                        <Link className="text-white" to="/investigators"> Investigators</Link>
                                     </li>
                                 </>}
                             <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
-                                <button onClick={() => {
+                                <button className="text-white" onClick={() => {
                                     dispatch(logout());
                                     navigate('/');
                                 }}>
@@ -42,10 +42,10 @@ const Header = () => {
                             </li>
                         </> : <>
                             <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
-                                <Link to="/login">Login</Link>
+                                <Link className="text-white" to="/login">Login</Link>
                             </li>
                             <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
-                                <Link to="/register">Register</Link>
+                                <Link className="text-white" to="/register">Register</Link>
                             </li>
                         </>
                     }

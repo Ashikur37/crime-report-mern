@@ -17,4 +17,5 @@ const getList=async()=>{
   return result;
 
 }
+
 export { reportCrime,getList };

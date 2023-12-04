@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllCrime } from "../../services/adminService";
+import { Link } from "react-router-dom";
 
 
 const Reports = () => {
@@ -33,6 +34,9 @@ const Reports = () => {
                     <th scope="col" className="px-6 py-3">
                         Address
                     </th>
+                    <th scope="col" className="px-6 py-3">
+                        Action
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -53,6 +57,11 @@ const Reports = () => {
                     </td>
                     <td className="px-6 py-4">
                     {report.address}
+                    </td>
+                    <td className="px-6 py-4">
+                            <Link to={`/report/${report._id}`}>
+                                View
+                            </Link>
                     </td>
                 </tr>)
                 }

@@ -6,7 +6,7 @@ export const crimeSchema = z.object({
   division: z.string().min(1, { message: "Select division" }),
   district: z.string().min(1, { message: "Select district" }),
   upazila: z.string().min(1, { message: "Select upazila" }),
-  description: z.string().min(1, { message: "Select description" }),
   address: z.string().min(1, { message: "Select address" }),
+  description: z.string().min(1, { message: "Select description" }),
   type: z.string().min(1, { message: "Select crime type" }),
 });
