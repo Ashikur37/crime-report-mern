@@ -10,6 +10,13 @@ const reportCrime = async (data: z.infer<typeof crimeSchema>) => {
   });
   return result;
 };
+const reportGuestCrime = async (data: z.infer<typeof crimeSchema>) => {
+  const result = await postRequest({
+    url: "crime/guest-create",
+    body: data,
+  });
+  return result;
+};
 const getList=async()=>{
   const result=await getRequest({
     url:"crime/list",
@@ -18,4 +25,4 @@ const getList=async()=>{
 
 }
 
-export { reportCrime,getList };
+export { reportCrime,getList,reportGuestCrime };

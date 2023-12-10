@@ -22,6 +22,30 @@ const createCrime = async (req: IReqAuth, res: Response) => {
       });
 
 }
+const createGuestCrime = async (req: Request, res: Response) => {
+    const {division,district,upazila,description,address,type,fullname,phone} =req.body;
+
+    const crime=await Crime.create({
+        division,
+        district,
+        upazila,
+        address,
+        description,
+        type,
+        UserId:null,
+        info:{
+            fullname,
+            phone
+        }
+    })
+    console.log(crime);
+    res.json({
+        success: true,
+        message: "Crime reported successfull",
+        data: crime,
+      });
+
+}
 const crimeList = async (req: IReqAuth, res: Response) => {
     const crimes=await Crime.find({UserId:req.user?._id});
     res.json({
@@ -32,4 +56,4 @@ const crimeList = async (req: IReqAuth, res: Response) => {
 }
 
 
-export {createCrime,crimeList};
+export {createCrime,crimeList,createGuestCrime};

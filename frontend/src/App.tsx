@@ -15,6 +15,7 @@ import Reports from "./pages/admin/Reports";
 import Investigators from "./pages/admin/Investigators";
 import AddInvestigator from "./pages/admin/AddInvestigator";
 import ViewReport from "./pages/admin/ViewReport";
+import ReportGuestCrime from "./pages/ReportGuest";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,6 +26,11 @@ function App() {
         {
           path: '/',
           element: <Home />
+        },
+        //report-guest
+        {
+          path: '/report-guest',
+          element: <ReportGuestCrime />
         },
         {
           path: '/report-crime',

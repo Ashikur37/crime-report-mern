@@ -32,13 +32,13 @@ export const registerSchema = z
   export const investigaotrSchema = z
   .object({
     fullname: z.string().min(1, { message: "Firstname is required" }),
+    phone: z.string().min(11, { message: "Enter valid phone" }),
     email: z.string().min(1, { message: "Email is required" }).email({
       message: "Must be a valid email",
     }),
     password: z
       .string()
       .min(6, { message: "Password must be atleast 6 characters" }),
-    phone: z.string().min(11, { message: "Enter valid phone" }),
     confirmPassword: z
       .string()
       .min(1, { message: "Confirm Password is required" }),

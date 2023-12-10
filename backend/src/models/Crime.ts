@@ -3,6 +3,7 @@ import { crimeStatus, crimeType } from "../utils/interface";
 
 const crimeSchema = new mongoose.Schema(
   {
+    info:{},
     UserId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     type: {
       type: String,
