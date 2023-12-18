@@ -15,7 +15,10 @@ export async function getRequest({ url }: { url: string }) {
     import.meta.env.VITE_API_ENDPOINT + url,
     requestOptions
   );
-
+  if(res.status==401){
+    localStorage.removeItem("user");
+    window.location.href="/login";
+  }
   const data = await res.json();
   return data;
 }

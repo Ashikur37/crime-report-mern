@@ -13,6 +13,9 @@ export const crimeSchema = z.object({
 
 export const guestCrimeSchema = z.object({
   // const {division,district,upazila,description,address,type} =req.body;
+  email: z.string().min(1, { message: "Email is required" }).email({
+    message: "Must be a valid email",
+  }),
   fullname: z.string().min(1, { message: "Firstname is required" }),
   phone: z.string().min(11, { message: "Enter valid phone" }),
   division: z.string().min(1, { message: "Select division" }),

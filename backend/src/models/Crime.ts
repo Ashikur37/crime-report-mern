@@ -17,6 +17,7 @@ const crimeSchema = new mongoose.Schema(
       type: [String], // Specifies that it's an array of strings
       default: [], // Optional: default value for the array (empty array in this case)
     },
+    
     description: String,
     status:{
       type:String,

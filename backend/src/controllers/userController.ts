@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import User from "../models/User";
 import generateToken from "../utils/jwt";
 import { IReqAuth } from "../utils/interface";
+import { sendMail } from "../utils/mail";
+
 const signUp = async (req: Request, res: Response) => {
   const { fullname, email, password, phone } = req.body;
   const existingUser = await User.findOne({ email });

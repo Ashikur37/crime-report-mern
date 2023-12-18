@@ -23,7 +23,7 @@ const createCrime = async (req: IReqAuth, res: Response) => {
 
 }
 const createGuestCrime = async (req: Request, res: Response) => {
-    const {division,district,upazila,description,address,type,fullname,phone} =req.body;
+    const {division,district,upazila,description,address,type,fullname,phone,email} =req.body;
 
     const crime=await Crime.create({
         division,
@@ -35,7 +35,8 @@ const createGuestCrime = async (req: Request, res: Response) => {
         UserId:null,
         info:{
             fullname,
-            phone
+            phone,
+            email
         }
     })
     console.log(crime);

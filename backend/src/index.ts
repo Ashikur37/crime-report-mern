@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser";
 import authRouter from "./routes/authRouter";
 import crimeRouter from "./routes/crimeRoutes";
 import adminRouter from "./routes/adminRoutes";
+import investigateRouter from "./routes/investigateRoutes";
+
 
 
 import connectDB from "./utils/db";
@@ -39,6 +41,8 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/crime", crimeRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/investigator", investigateRouter);
+
 
 
 app.listen(PORT, async () => {

@@ -97,6 +97,27 @@ const ReportGuestCrimeForm = () => {
                         {errors.phone?.message}
                     </p>
                 )}
+            </div> 
+            <div className="mb-4">
+            <label
+                        className="block mb-2 text-sm font-bold text-gray-700"
+                        htmlFor="email"
+                    >
+                        Email
+                    </label>
+                    <input
+                        className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${errors.email && "border-red-500"
+                            } rounded appearance-none focus:outline-none focus:shadow-outline`}
+                        id="email"
+                        type="email"
+                        placeholder="Email"
+                        {...register("email")}
+                    />
+                    {errors.email && (
+                        <p className="text-xs italic text-red-500 mt-2">
+                            {errors.email?.message}
+                        </p>
+                    )}
             </div>
             <div className="mb-4">
                 <label

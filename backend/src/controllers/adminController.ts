@@ -3,6 +3,7 @@ import Crime from "../models/Crime";
 import { IReqAuth, userRole } from "../utils/interface";
 import Investigator from "../models/Investigator";
 import User from "../models/User";
+import { sendMail } from "../utils/mail";
 
 const allCrimeList = async (req: IReqAuth, res: Response) => {
   const crimes = await Crime.find({});
@@ -31,6 +32,36 @@ const assignInvestigator = async (req: IReqAuth, res: Response) => {
   const crime=await Crime.findByIdAndUpdate(crime_id,{
     InvestigatorId:investigator
   })
+  const investigatorData=await User.findById(investigator);
+  let name="";
+  let email="";
+  let phone="";
+
+  if(crime?.UserId){
+    const user=await User.findById(crime?.UserId);
+    name=user?.fullname!;
+    email=user?.email!;
+    phone=user?.phone!;
+
+  }
+  else{
+    name=crime?.info?.fullname;
+    email=crime?.info?.email;
+    phone=crime?.info?.phone;
+
+  }
+  await sendMail(email,"Investigator assigned",`
+    An investigator has assigned for your report 
+    Name:${investigatorData?.fullname}
+    Phone:${investigatorData?.phone}
+    Email:${investigatorData?.email}
+  `);
+  await sendMail(investigatorData?.email!,"Report assigned",`
+  You have been  assigned for a report 
+  Name:${name}
+  Phone:${phone}
+  Email:${email}
+`);
   res.json({
     success: true,
     data: crime,

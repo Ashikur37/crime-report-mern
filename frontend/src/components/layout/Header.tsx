@@ -24,7 +24,11 @@ const Header = () => {
                                     <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
                                         <Link className="text-white" to="/report-crime">Report Crime</Link>
                                     </li>
-                                </> : <>
+                                </> :user.role=="INVESTIGATOR"?<>
+                                <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
+                                        <Link className="text-white" to="/assigned-reports">Assigned Reports</Link>
+                                    </li>
+                                </>: <>
                                     <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
                                         <Link className="text-white" to="/reports"> Reports</Link>
                                     </li>
@@ -46,6 +50,9 @@ const Header = () => {
                             </li>
                             <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
                                 <Link className="text-white" to="/register">Register</Link>
+                            </li>
+                            <li className="inline-block px-4 text-gray-700 no-underline transition-colors duration-300 ease-in-out hover:text-teal-300">
+                                <Link className="text-white" to="/report-guest">Report as guest</Link>
                             </li>
                         </>
                     }
