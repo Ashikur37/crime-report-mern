@@ -1,12 +1,10 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { login } from "../../services/authService";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/slices/authSlice";
+
 import { crimeSchema } from "../../utils/validations/crime";
 import { districts, divisions, upazilas } from "../../utils/validations/area";
 import { reportCrime } from "../../services/crimeService";
@@ -29,7 +27,7 @@ const ReportCrimeForm = () => {
 
     const onSubmit: SubmitHandler<z.infer<typeof crimeSchema>> = async (data) => {
         setLoading(true);
-        const result = await reportCrime(data)
+         await reportCrime(data)
         setLoading(false);
         toast.success("Report submitted successfull");
             navigate('/my-reports');
