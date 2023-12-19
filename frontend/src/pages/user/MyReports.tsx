@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getList } from "../../services/crimeService"
+import { Link } from "react-router-dom";
 
 
 const MyReports = () => {
@@ -33,6 +34,12 @@ const MyReports = () => {
                     <th scope="col" className="px-6 py-3">
                         Address
                     </th>
+                    <th scope="col" className="px-6 py-3">
+                        Status
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                        View
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -53,6 +60,17 @@ const MyReports = () => {
                     </td>
                     <td className="px-6 py-4">
                     {report.address}
+                    </td>
+                    <td className="px-6 py-4">
+                    <span className={`${report.status=='Running'&&'bg-blue-500'} ${report.status=='Pending'&&'bg-yellow-500'} text-white px-2 py-1 rounded`}>{report.status}</span>
+                    
+                    </td>
+                    <td>
+                    <td className="px-6 py-4">
+                                <Link to={`/my-reports/${report._id}`}>
+                                    View
+                                </Link>
+                            </td>
                     </td>
                 </tr>)
                 }

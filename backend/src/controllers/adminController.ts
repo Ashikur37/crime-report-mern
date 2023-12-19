@@ -14,9 +14,13 @@ const allCrimeList = async (req: IReqAuth, res: Response) => {
 };
 const getCrime=async(req:Request,res:Response)=>{
   const crime=await Crime.findById(req.params.id);
+  const investigator=await User.findById(crime?.InvestigatorId);
+  const user=await User.findById(crime?.UserId);
   res.json({
     success: true,
     data: crime,
+    investigator,
+    user
   });
 }
 const investigaorList = async (req: IReqAuth, res: Response) => {

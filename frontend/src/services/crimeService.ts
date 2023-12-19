@@ -24,5 +24,11 @@ const getList=async()=>{
   return result;
 
 }
+const getMyCrime=async(id:string)=>{
+  const result=await getRequest({
+    url:"crime/"+id,
+  })
+  return result;
+}
 
-export { reportCrime,getList,reportGuestCrime };
+export { reportCrime,getList,reportGuestCrime,getMyCrime };

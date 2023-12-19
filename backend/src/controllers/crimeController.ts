@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Crime from "../models/Crime";
 import { IReqAuth } from "../utils/interface";
+import User from "../models/User";
 
 const createCrime = async (req: IReqAuth, res: Response) => {
     const {division,district,upazila,description,address,type} =req.body;
@@ -55,6 +56,17 @@ const crimeList = async (req: IReqAuth, res: Response) => {
       });
 
 }
+const getCrime=async(req:Request,res:Response)=>{
+    const crime=await Crime.findById(req.params.id);
+    const investigator=await User.findById(crime?.InvestigatorId);
+    const user=await User.findById(crime?.UserId);
+    res.json({
+      success: true,
+      data: crime,
+      user,
+      investigator
+    });
+  }
 
 
-export {createCrime,crimeList,createGuestCrime};
+export {createCrime,crimeList,createGuestCrime,getCrime};

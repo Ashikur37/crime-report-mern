@@ -15,6 +15,8 @@ import { reportCrime, reportGuestCrime } from "../../services/crimeService";
 
 const ReportGuestCrimeForm = () => {
     const [loading, setLoading] = useState<boolean>(false);
+    const [selectedDistricts,setSelectedDistricts]=useState([]);
+    const [selectedUpazilas,setSelectedUpazilas]=useState([]);
     const navigate = useNavigate();
     const {
         register,
@@ -149,7 +151,12 @@ const ReportGuestCrimeForm = () => {
                     Division
                 </label>
                 <select {...register("division")} className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${errors.division && "border-red-500"
-                    } rounded appearance-none focus:outline-none focus:shadow-outline`}>
+                    } rounded appearance-none focus:outline-none focus:shadow-outline`}
+                    onChange={e=>{
+                        const division_id=divisions.filter(div=>div.name==e.target.value)[0].id;
+                        setSelectedDistricts(districts.filter(dis=>dis.division_id==division_id));
+                    }}
+                    >
                     <option value="">Select division</option>
                     {divisions.map((division, index) => <option key={index} value={division.name}>{division.name}</option>)}
                 </select>
@@ -166,9 +173,14 @@ const ReportGuestCrimeForm = () => {
                     District
                 </label>
                 <select {...register("district")} className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${errors.district && "border-red-500"
-                    } rounded appearance-none focus:outline-none focus:shadow-outline`}>
+                    } rounded appearance-none focus:outline-none focus:shadow-outline`}
+                    onChange={e=>{
+                        let district_id=districts.filter(div=>div.name==e.target.value)[0].id;
+                        setSelectedUpazilas(upazilas.filter(dis=>dis.district_id==district_id));
+                    }}
+                    >
                     <option value="">Select district</option>
-                    {districts.map((district, index) => <option key={index} value={district.name}>{district.name}</option>)}
+                    {selectedDistricts.map((district, index) => <option key={index} value={district.name}>{district.name}</option>)}
                 </select>
                 {errors.district && (
                     <p className="text-xs italic text-red-500 mt-2">
@@ -185,7 +197,7 @@ const ReportGuestCrimeForm = () => {
                 <select {...register("upazila")} className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border ${errors.upazila && "border-red-500"
                     } rounded appearance-none focus:outline-none focus:shadow-outline`}>
                     <option value="">Select upazila</option>
-                    {upazilas.map((upazila, index) => <option key={index} value={upazila.name}>{upazila.name}</option>)}
+                    {selectedUpazilas.map((upazila, index) => <option key={index} value={upazila.name}>{upazila.name}</option>)}
                 </select>
                 {errors.upazila && (
                     <p className="text-xs italic text-red-500 mt-2">

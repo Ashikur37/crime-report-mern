@@ -18,6 +18,7 @@ import ViewReport from "./pages/admin/ViewReport";
 import ReportGuestCrime from "./pages/ReportGuest";
 import AssignedReports from "./pages/investigator/AssignedReport";
 import ViewAssignReport from "./pages/investigator/ViewAssignedReport";
+import ViewMyReport from "./pages/user/ViewMyReport";
 
 function App() {
   const router = createBrowserRouter([
@@ -52,7 +53,7 @@ function App() {
         element: <ViewAssignReport />,
       },
       {
-        path: "report/:reportIdViewAssignReport",
+        path: "report/:reportId",
         element: <ViewReport />,
       },
       {
@@ -66,6 +67,10 @@ function App() {
         {
           path: '/my-reports',
           element: <MyReports />
+        },
+        {
+          path: '/my-reports/:reportId',
+          element: <ViewMyReport />
         },
         {
           path: '/login',
