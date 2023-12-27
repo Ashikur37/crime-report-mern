@@ -101,6 +101,8 @@ const ViewAssignReport = () => {
                     <option selected={report.status === 'Running'} value="Running">Running</option>
                     <option selected={report.status === 'Completed'} value="Completed">Completed</option>
                     <option selected={report.status === 'Cancelled'} value="Cancelled">Cancelled</option>
+                    <option selected={report.status === 'Fake'} value="Fake">Fake</option>
+
 
 
                     {/* {investigators.map((investigator,index)=><option key={index} value={investigator._id}>{investigator.fullname}</option>)} */}

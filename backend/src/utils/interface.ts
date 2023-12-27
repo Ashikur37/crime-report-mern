@@ -20,6 +20,7 @@ export enum crimeStatus {
   Running = "Running",
   Cancelled = "Cancelled",
   Completed = "Completed",
+  Fake="Fake",
 }
 
 // export interface IDecodedToken {

@@ -31,7 +31,7 @@ const ReportGuestCrimeForm = () => {
         const result = await reportGuestCrime(data)
         setLoading(false);
         toast.success("Report submitted successfull");
-        navigate('/');
+        navigate('/report-success');
 
 
     };
