@@ -1,8 +1,7 @@
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 import { Link } from "react-router-dom"
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+// import 'swiper/css';
 const Home = () => {
   
   const user = useSelector((state: RootState) => state.auth.user)
